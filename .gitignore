@@ -187,3 +187,5 @@ dmypy.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,macos
+todo.txt
+create_schema.sql

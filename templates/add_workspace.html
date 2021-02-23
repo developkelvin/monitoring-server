@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Add Workspace</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section">
+        <!--   Signup Form Section   -->
+        <div class="row">
+            <form class="col s12" action="/addworkspace" method="POST">
+                <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                        <input placeholder="사이드 프로젝트" id="first_name" type="text" class="validate" name="name">
+                        <label for="first_name">Workspace Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                        <textarea placeholder="서버 모니터링" id="textarea1" class="materialize-textarea" name="desc"></textarea>
+                        <label for="textarea1">Description</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6 offset-s5">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Create
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

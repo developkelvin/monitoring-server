@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  {% block title %}
+  {% endblock %}
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{{url_for('static', filename='css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{url_for('static', filename='css/dashboard.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  {% block css %}
+  {% endblock %}
+</head>
+<body class="has-fixed-sidenav">
+  <header>
+    <div class="navbar-fixed">
+      <nav class="navbar white">
+        <div class="nav-wrapper"><a href="#!" class="brand-logo grey-text text-darken-4"></a>
+          <ul id="nav-mobile" class="right">
+            <li class="hide-on-med-and-down"><a href="/">Home</a></li>
+            <li class="hide-on-med-and-down"><a href="/workspace">Workspace</a></li>
+            <li class="hide-on-med-and-down"><a href="/logout">Logout</a></li>
+          </ul><a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons black-text">menu</i></a>
+        </div>
+      </nav>
+    </div>
+    <ul id="sidenav-left" class="sidenav sidenav-fixed" style="transform: translateX(0%);">
+      <li><a href="/dashboard" class="logo-container">Dashboard</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li class="bold waves-effect"><a class="collapsible-header" tabindex="0">Summary<i class="material-icons chevron">chevron_left</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="/dashboard" class="waves-effect">Statistics<i class="material-icons">calculate</i></a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="bold waves-effect"><a class="collapsible-header" tabindex="0">Servers<i class="material-icons chevron">chevron_left</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="/dashboard" class="waves-effect">Server1<i class="material-icons">computer</i></a></li>
+                <li><a href="/dashboard" class="waves-effect">Server2<i class="material-icons">computer</i></a></li>
+                <li><a href="/dashboard" class="waves-effect">Server3<i class="material-icons">computer</i></a></li>
+                <li><a href="/dashboard" class="waves-effect">Server4<i class="material-icons">computer</i></a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    
+    
+  </header>
+
+  {% block content %}
+  {% endblock %}
+
+  {% include "footer.html" %}
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{{url_for('static', filename='js/materialize.js')}}"></script>
+  <script src="{{url_for('static', filename='js/init.js')}}"></script>
+  <script>
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+  </script>
+  {% block scripts %}
+  {% endblock %}
+  </body>
+</html>

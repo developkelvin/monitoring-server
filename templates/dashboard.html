@@ -1,0 +1,118 @@
+{% extends "base_dashboard.html" %}
+
+{% block title %}
+<title>Dashboard</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h3>Summary</h3>
+    </div>
+    <div class="row">
+        <div class="col s4 m4">
+            <div class="card orange">
+                <div class="card-content">
+                    <span class="card-title">CPU Usage</span>
+                    <h1 class="center-align">40%</h1>
+                  </div>
+            </div>
+        </div>
+        <div class="col s4 m4">
+            <div class="card green">
+                <div class="card-content">
+                    <span class="card-title">RAM Usage</span>
+                    <h1 class="center-align">20%</h1>
+                  </div>
+            </div>
+        </div>
+        <div class="col s4 m4">
+            <div class="card green">
+                <div class="card-content">
+                    <span class="card-title">DISK Usage</span>
+                    <h1 class="center-align">10%</h1>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- d3.js -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<!-- chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 0
+                }, 
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        // label 변경
+        myChart.data.labels = ["15:33", "15:34", "15:35", "15:36", "15:37", "15:38"];
+        // 그냥 마치, 딕셔너리 리스트의 자료구조인 것처럼 접근해서 값을 변경해줘도 문제없습니다. 
+        myChart.data.datasets[0].data = [30, 20, 33, 47, 38, 34];
+        myChart.update();
+        var frame_duration = 1000 * 60;
+        var i=0;
+        d3.interval(
+            function(){
+                if (i > 10) {
+                    this.stop();
+                }
+                else {
+                    // json으로 요청받아 데이터 업데이트
+                    myChart.data.datasets[0].data = [30 + i, 20 + i, 33 + i, 47 + i, 38 + i, 34 + i];
+                    myChart.update(); // 데이터를 바꾼 다음, 이렇게 업데이트를 해야 적용된다.
+                }
+                i=i+1;
+            }, 
+            frame_duration
+        );
+</script>
+
+
+{% endblock %}
